@@ -28,7 +28,7 @@ Employee empObj = new Employee();
 			@GET
 			@Path("/")
 			@Produces(MediaType.TEXT_HTML)
-public String readItems()
+public String readEmployees()
 {
 return empObj.readEmployees();
 }
