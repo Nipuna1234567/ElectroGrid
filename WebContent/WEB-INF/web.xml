@@ -27,7 +27,10 @@
 </servlet-mapping><display-name>ElectroGrid</display-name>
 
 
-
+<servlet-mapping>
+ <servlet-name>Jersey Web Application</servlet-name>
+ <url-pattern>/BillService/*</url-pattern>
+</servlet-mapping><display-name>ElectroGrid</display-name>
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
