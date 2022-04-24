@@ -21,6 +21,12 @@
  <url-pattern>/ItemService/*</url-pattern>
 </servlet-mapping><display-name>ElectroGrid</display-name>
 
+<servlet-mapping>
+ <servlet-name>Jersey Web Application</servlet-name>
+ <url-pattern>/ComplainService/*</url-pattern>
+</servlet-mapping><display-name>ElectroGrid</display-name>
+
+
 
   
   <welcome-file-list>
