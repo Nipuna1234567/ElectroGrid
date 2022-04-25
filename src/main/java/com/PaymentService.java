@@ -78,5 +78,18 @@ return payObj.readPayments();
 			 String output = payObj.deletePayment(paymentID);
 			return output;
 			}
+			
+			// Search profile details
+			@GET
+			@Path("/profile/{paymentID}")
+			@Consumes(MediaType.APPLICATION_JSON)
+			@Produces(MediaType.TEXT_PLAIN)
+			//@Produces(MediaType.TEXT_HTML)
+			public String readprofile(@PathParam("paymentID") String paymentID) {
+
+				return payObj.viewProfile(paymentID);
+
+
+			}
 
 }

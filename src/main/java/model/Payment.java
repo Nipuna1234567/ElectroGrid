@@ -178,4 +178,67 @@ return output;
 	 return output;
 	 }
 	
-	}
+	//Search profile 
+	public String viewProfile(String paymentID) {
+
+
+		String output = "";
+
+		try {
+			Connection con = connect();
+
+			if (con == null) {
+				return "Error while connecting to the database for reading.";
+			}
+
+			output = "<table border=\"1\"><tr><th>Payment ID</th><th>Card Type</th><th>Card Number</th><th>Expire Date</th><th>CVV</th><th>Customer ID</th><th>Update</th><th>Delete</th></tr>";
+
+			String query = "select *  from payment where paymentID=' " + paymentID + "'" ;
+
+
+			Statement stmt = con.createStatement();
+
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			 // iterate through the rows in the result set
+			 while (rs.next())
+			 {
+			 String paymentID1 = Integer.toString(rs.getInt("paymentID"));
+			 String cardName = rs.getString("cardName");
+			 String cardNo = Integer.toString(rs.getInt("cardNo"));
+			 String expDate = rs.getString("expDate");
+			 String cvv = Integer.toString(rs.getInt("cvv"));
+			 String cusID = Integer.toString(rs.getInt("cusID"));
+			 
+			 
+			 // Add into the html table
+			 output += "<tr><td>" + paymentID + "</td>";
+			 output += "<td>" + cardName + "</td>";
+			 output += "<td>" + cardNo + "</td>";
+			 output += "<td>" + expDate + "</td>";
+			 output += "<td>" + cvv + "</td>";
+			 output += "<td>" + cusID + "</td>";
+			 
+			 // buttons
+			 output += "<td><input name='btnUpdate' type='button' value='Update'class='btn btn-secondary'></td>"
+			 + "<td><form method='post' action='items.jsp'>"
+			 + "<input name='btnRemove' type='submit' value='Delete' class='btn btn-danger'>"
+			 + "<input name='paymentID' type='hidden' value='" + paymentID
+			 + "'>" + "</form></td></tr>";
+			 }
+			 con.close();
+			 // Complete the html table
+			 output += "</table>";
+			 }
+			 catch (Exception e)
+			 {
+			 output = "Error while reading the Payment.";
+			 System.err.println(e.getMessage());
+			 }
+			 return output;
+			 }
+
+
+	
+}
