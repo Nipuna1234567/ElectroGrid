@@ -1,8 +1,5 @@
-package pcom;
+package com;
 
-
-
-import pmodel.Payment;
 
 
 //For REST Service
@@ -10,6 +7,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 //For JSON
 import com.google.gson.*;
+
+import model.Payment;
+
 //For XML
 import org.jsoup.*;
 import org.jsoup.parser.*;
