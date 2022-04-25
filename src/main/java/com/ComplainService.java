@@ -75,5 +75,16 @@ return cmpObj.readComplain();
 			 String output = cmpObj.deleteComplain(complainID);
 			return output;
 			}
+			
+			// Search
+			@GET
+			@Path("/profile/{complainID}")
+			@Consumes(MediaType.APPLICATION_JSON)
+			@Produces(MediaType.TEXT_PLAIN)
+			//@Produces(MediaType.TEXT_HTML)
+			public String readprofile(@PathParam("complainID") String complainID) {
+		
+				return cmpObj.viewProfile(complainID);
+			}
 
 }

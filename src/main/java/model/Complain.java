@@ -13,6 +13,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 public class Complain
 { //A common method to connect to the DB
 private Connection connect()
@@ -154,7 +161,7 @@ System.err.println(e.getMessage());
 }
 return output;
 }
-	public String deleteComplain(String billID)
+	public String deleteComplain(String complainID)
 	 {
 	 String output = "";
 	 try
@@ -166,7 +173,7 @@ return output;
 	 String query = "delete from complain where complainID=?";
 	 PreparedStatement preparedStmt = con.prepareStatement(query);
 	 // binding values
-	 preparedStmt.setInt(1, Integer.parseInt(billID));
+	 preparedStmt.setInt(1, Integer.parseInt(complainID));
 	 // execute the statement
 	 preparedStmt.execute();
 	 con.close();
@@ -180,4 +187,68 @@ return output;
 	 return output;
 	 }
 	
-	}
+	//Search 
+	public String viewProfile(String complainID) {
+
+
+		String output = "";
+
+		try {
+			Connection con = connect();
+
+			if (con == null) {
+				return "Error while connecting to the database for reading.";
+			}
+
+			output = "<table border=\"1\"><tr><th>Complain ID</th><th>Customer ID</th><th>Account No</th><th>Date</th><th>Description</th><th>Update</th><th>Delete</th></tr>";
+
+			String query = "select *  from complain where complainID=' " + complainID + "'" ;
+
+
+			Statement stmt = con.createStatement();
+
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			 // iterate through the rows in the result set
+			 while (rs.next())
+			 {
+
+				 String complainID1 = Integer.toString(rs.getInt("complainID"));
+				 String cuscmID = Integer.toString(rs.getInt("cuscmID"));
+				 String accountNo = Integer.toString(rs.getInt("accountNo"));
+				 String cDate = rs.getString("cDate");
+				 String descri = rs.getString("descri");
+
+			 
+			 
+			 // Add into the html table
+			 output += "<tr><td>" + complainID + "</td>";
+			 output += "<td>" + accountNo + "</td>";
+			 output += "<td>" + accountNo + "</td>";
+			 output += "<td>" + cDate + "</td>";
+			 output += "<td>" + descri + "</td>";
+
+			 
+			 // buttons
+			 output += "<td><input name='btnUpdate' type='button' value='Update'class='btn btn-secondary'></td>"
+			 + "<td><form method='post' action='items.jsp'>"
+			 + "<input name='btnRemove' type='submit' value='Delete' class='btn btn-danger'>"
+			 + "<input name='complainID' type='hidden' value='" + complainID
+			 + "'>" + "</form></td></tr>";
+			 }
+			 con.close();
+			 // Complete the html table
+			 output += "</table>";
+			 }
+			 catch (Exception e)
+			 {
+			 output = "Error while reading the Complain.";
+			 System.err.println(e.getMessage());
+			 }
+			 return output;
+			 }
+	
+		
+
+}
