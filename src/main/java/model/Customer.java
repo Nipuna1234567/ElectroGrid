@@ -1,4 +1,4 @@
-package cumodel;
+package model;
 
 
 
