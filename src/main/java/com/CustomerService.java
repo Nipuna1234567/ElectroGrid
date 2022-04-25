@@ -1,3 +1,9 @@
+/**
+ * @author S.H.B Dasanayake
+ *         IT19778754
+ * 
+ */
+
 package com;
 
 //For REST Service
@@ -18,13 +24,16 @@ import org.jsoup.nodes.Document;
 public class CustomerService 
 {
 Customer cusObj = new Customer();
+
+	//View Customer Details
 			@GET
 			@Path("/")
 			@Produces(MediaType.TEXT_HTML)
-public String readCustomers()
-{
-return cusObj.readCustomers();
+			public String readCustomers()
+			{
+			return cusObj.readCustomers();
 }
+	//Insert Customer		
 			@POST
 			@Path("/")
 			@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -38,7 +47,7 @@ return cusObj.readCustomers();
 			 String output = cusObj.insertCustomer(cusName, cusAddress, cusEmail, cusPhone);
 			return output;
 			}
-
+	//Update Customer Details
 			@PUT
 			@Path("/")
 			@Consumes(MediaType.APPLICATION_JSON)
@@ -56,7 +65,7 @@ return cusObj.readCustomers();
 			String output = cusObj.updateCustomer(cusID, cusName, cusAddress, cusEmail, cusPhone);
 			return output;
 			}
-
+	//Delete Customer
 			@DELETE
 			@Path("/")
 			@Consumes(MediaType.APPLICATION_XML)
@@ -70,6 +79,19 @@ return cusObj.readCustomers();
 			 String cusID = doc.select("cusID").text();
 			 String output = cusObj.deleteCustomer(cusID);
 			return output;
+			}
+			
+	// Search profile details
+			@GET
+			@Path("/profile/{cusID}")
+			@Consumes(MediaType.APPLICATION_JSON)
+			@Produces(MediaType.TEXT_PLAIN)
+			//@Produces(MediaType.TEXT_HTML)
+			public String readprofile(@PathParam("cusID") String cusID) {
+
+				return cusObj.viewProfile(cusID);
+
+
 			}
 
 }

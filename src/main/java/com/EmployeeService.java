@@ -1,3 +1,9 @@
+/**
+ * @author S.H.B Dasanayake
+ *         IT19778754
+ * 
+ */
+
 package com;
 
 //For REST Service
@@ -18,13 +24,17 @@ import org.jsoup.nodes.Document;
 public class EmployeeService 
 {
 Employee empObj = new Employee();
+
+	//View Employee Details
 			@GET
 			@Path("/")
 			@Produces(MediaType.TEXT_HTML)
-public String readEmployees()
-{
-return empObj.readEmployees();
-}
+			public String readEmployees()
+			{
+			return empObj.readEmployees();
+			}
+			
+	//Insert Employee
 			@POST
 			@Path("/")
 			@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -38,7 +48,8 @@ return empObj.readEmployees();
 			 String output = empObj.insertEmployee(employeeName, employeeEmail, empAge, phone, nic);
 			return output;
 			}
-
+			
+	//Update Employee Details
 			@PUT
 			@Path("/")
 			@Consumes(MediaType.APPLICATION_JSON)
@@ -57,7 +68,8 @@ return empObj.readEmployees();
 			String output = empObj.updateEmployee(employeeNumber,employeeName, employeeEmail, empAge, phone, nic);
 			return output;
 			}
-
+			
+	//Delete Employee
 			@DELETE
 			@Path("/")
 			@Consumes(MediaType.APPLICATION_XML)
@@ -72,5 +84,19 @@ return empObj.readEmployees();
 			 String output = empObj.deleteEmployee(employeeNumber);
 			return output;
 			}
+			
+	// Search profile details
+			@GET
+			@Path("/profile/{employeeNumber}")
+			@Consumes(MediaType.APPLICATION_JSON)
+			@Produces(MediaType.TEXT_PLAIN)
+			//@Produces(MediaType.TEXT_HTML)
+			public String readprofile(@PathParam("employeeNumber") String employeeNumber) {
+
+				return empObj.viewProfile(employeeNumber);
+
+
+			}
+
 
 }
