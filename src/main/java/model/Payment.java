@@ -1,4 +1,4 @@
-package pmodel;
+package model;
 
 
 import java.sql.Connection;
@@ -23,7 +23,7 @@ private Connection connect()
  {e.printStackTrace();}
  return con;
  }
-public String insertPayment(String paymentID, String cardName, String cardNo, String expDate, String cvv,String cusID)
+public String insertPayment(String cardName, String cardNo, String expDate, String cvv,String cusID)
  {
  String output = "";
  try
