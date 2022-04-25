@@ -191,4 +191,70 @@ return output;
 	 return output;
 	 }
 	
+	//Search 
+	public String viewProfile(String billID) {
+
+
+		String output = "";
+
+		try {
+			Connection con = connect();
+
+			if (con == null) {
+				return "Error while connecting to the database for reading.";
+			}
+
+			output = "<table border=\"1\"><tr><th>Bill ID</th><th>Customer ID</th><th>Payment ID</th><th>Account No</th><th>Issued Date</th><th>Price Per Unit</th><th>Used Unit</th><th>Total Amount</th><th>Update</th><th>Delete</th></tr>";
+
+			String query = "select *  from bill where billID=' " + billID + "'" ;
+
+
+			Statement stmt = con.createStatement();
+
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			
+			 // iterate through the rows in the result set
+			 while (rs.next())
+			 {
+
+				 String billID1 = Integer.toString(rs.getInt("billID"));
+				 String cusbID = Integer.toString(rs.getInt("cusbID"));
+				 String paymentID = Integer.toString(rs.getInt("paymentID"));
+				 String accountNo = Integer.toString(rs.getInt("accountNo"));
+				 String bDate = rs.getString("bDate");
+				 String ppUnit = Integer.toString(rs.getInt("ppUnit"));
+				 String usedUnit = rs.getString("usedUnit");
+				 String tbAmount = Integer.toString(rs.getInt("tbAmount"));
+			 
+			 
+			 // Add into the html table
+			 output += "<tr><td>" + billID + "</td>";
+			 output += "<td>" + cusbID + "</td>";
+			 output += "<td>" + paymentID + "</td>";
+			 output += "<td>" + accountNo + "</td>";
+			 output += "<td>" + bDate + "</td>";
+			 output += "<td>" + ppUnit + "</td>";
+			 output += "<td>" + usedUnit + "</td>";
+			 output += "<td>" + tbAmount + "</td>";
+			 
+			 // buttons
+			 output += "<td><input name='btnUpdate' type='button' value='Update'class='btn btn-secondary'></td>"
+			 + "<td><form method='post' action='items.jsp'>"
+			 + "<input name='btnRemove' type='submit' value='Delete' class='btn btn-danger'>"
+			 + "<input name='billID' type='hidden' value='" + billID
+			 + "'>" + "</form></td></tr>";
+			 }
+			 con.close();
+			 // Complete the html table
+			 output += "</table>";
+			 }
+			 catch (Exception e)
+			 {
+			 output = "Error while reading the Bill.";
+			 System.err.println(e.getMessage());
+			 }
+			 return output;
+			 }
 	}

@@ -78,5 +78,18 @@ return biObj.readBills();
 			 String output = biObj.deleteBill(billID);
 			return output;
 			}
+			
+			// Search 
+			@GET
+			@Path("/profile/{billID}")
+			@Consumes(MediaType.APPLICATION_JSON)
+			@Produces(MediaType.TEXT_PLAIN)
+			//@Produces(MediaType.TEXT_HTML)
+			public String readprofile(@PathParam("billID") String billID) {
+
+				return biObj.viewProfile(billID);
+
+
+			}
 
 }
