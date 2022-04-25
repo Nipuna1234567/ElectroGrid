@@ -69,7 +69,7 @@ public String readPayments()
  
  // Prepare the html table to be displayed
  
- output = "<table border='1'><tr><th>Card Name</th><th>Card Number</th>" +
+ output = "<table border='1'><tr><th>Card Type</th><th>Card Number</th>" +
 			 "<th>Expire Date</th>" +
 			 "<th>CVV</th>" +
 			 "<th>Customer ID</th>" +
